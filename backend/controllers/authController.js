@@ -123,7 +123,7 @@ exports.forgotPassword = catchAsyncErrors(async (req, res, next) => {
 
 
 
-//Forgot password /api/v1/password/forgot
+//Reset password api/v1/password/reset/token
 exports.resetPassword = catchAsyncErrors(async (req, res, next) => {
 
     //hash url token
