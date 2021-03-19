@@ -128,7 +128,7 @@ exports.resetPassword = catchAsyncErrors(async (req, res, next) => {
 
     //hash url token
     const resetPasswordToken = crypto.createHash('sha256').update(req.params.token).digest('hex');
-    
+
     const user = await User.findOne({
         resetPasswordToken,
         resetPasswordExpire: { $gt: Date.now() }
@@ -149,7 +149,7 @@ exports.resetPassword = catchAsyncErrors(async (req, res, next) => {
     user.resetPasswordExpire = undefined;
 
     await user.save();
-    sendToken(user,200,res);
+    sendToken(user, 200, res);
 })
 
 
@@ -175,7 +175,7 @@ exports.logout = catchAsyncErrors(async (req, res, next) => {
 
 //get currently loggedin user details /api/v1/me
 
-exports.getUserProfile = catchAsyncErrors(async (req, res, next)=>{
+exports.getUserProfile = catchAsyncErrors(async (req, res, next) => {
 
     const user = await User.findById(req.user.id);
     res.status(200).json({
@@ -186,25 +186,25 @@ exports.getUserProfile = catchAsyncErrors(async (req, res, next)=>{
 
 
 //update / change password =>/api/v1/password/update
-exports.updatePassword = catchAsyncErrors(async (req, res, next)=>{
+exports.updatePassword = catchAsyncErrors(async (req, res, next) => {
 
     const user = await User.findById(req.user.id).select('+password');
 
     //check previous password
     const isMatched = await user.comparePassword(req.body.oldPassword);
-    if(!isMatched){
+    if (!isMatched) {
         return next(new ErrorHandler('old password is incorrect', 401));
     };
 
     user.password = req.body.password;
     await user.save();
-    sendToken(user,200,res);
+    sendToken(user, 200, res);
 
 })
 
 
 //update user profile /api/v1/me/updatePassword
-exports.updateProfile = catchAsyncErrors(async (req, res, next)=>{
+exports.updateProfile = catchAsyncErrors(async (req, res, next) => {
 
     const newUserData = {
         name: req.body.name,
@@ -213,8 +213,8 @@ exports.updateProfile = catchAsyncErrors(async (req, res, next)=>{
 
     //update avatar TO DO
 
-    
-    const user = await User.findByIdAndUpdate(req.user.id,newUserData,{
+
+    const user = await User.findByIdAndUpdate(req.user.id, newUserData, {
         new: true,
         runValidators: true,
         useFindAndModify: false
@@ -222,7 +222,7 @@ exports.updateProfile = catchAsyncErrors(async (req, res, next)=>{
 
     res.status(200).json({
         success: true,
-        message : "Profile updated"
+        message: "Profile updated"
     })
 
 })
@@ -234,13 +234,83 @@ exports.updateProfile = catchAsyncErrors(async (req, res, next)=>{
 
 //get all users api/v1/admin/users
 
-exports.getAllUsers = catchAsyncErrors(async (req, res, next)=>{
+exports.getAllUsers = catchAsyncErrors(async (req, res, next) => {
 
     const users = await User.find();
 
+    if (!users) {
+        return next(new ErrorHandler('There are no users', 400));
+
+    }
     res.status(200).json({
         success: true,
         users
     })
+
+})
+
+//get user Details api/v1/admin/user/id
+
+exports.getUserDetails = catchAsyncErrors(async (req, res, next) => {
+
+    const user = await User.findById(req.params.id);
+    if (!user) {
+        return next(new ErrorHandler('User not found'));
+
+    }
+
+    res.status(200).json({
+        success: true,
+        user
+    })
+
+
+})
+
+
+//update user  /api/v1/admin/user/id
+exports.updateUser = catchAsyncErrors(async (req, res, next) => {
+
+    const newUserData = {
+        name: req.body.name,
+        email: req.body.email,
+        role: req.body.role
+    }
+
+    //update avatar TO DO
+
+
+    const user = await User.findByIdAndUpdate(req.params.id, newUserData, {
+        new: true,
+        runValidators: true,
+        useFindAndModify: false
+    })
+
+    res.status(200).json({
+        success: true,
+        user
+    })
+
+})
+
+
+//delete api/v1/admin/user/id
+
+exports.deleteUser = catchAsyncErrors(async (req, res, next) => {
+
+    const user = await User.findById(req.params.id);
+    if (!user) {
+        return next(new ErrorHandler('User not found'));
+
+    }
+
+    //remove avatar from cloudinary TODO
+
+    await user.remove();
+    res.status(200).json({
+        success: true,
+        user
+    })
+
 
 })
