@@ -22,7 +22,7 @@ exports.registerUser = catchAsyncErrors(async (req, res, next) => {
 
         token
     }) */
-    sendToken(user,200,res)
+    sendToken(user, 200, res)
 
 
 })
@@ -58,6 +58,22 @@ exports.loginUser = catchAsyncErrors(async (req, res, next) => {
         success:true,
         token
     }) */
-    sendToken(user,200,res)
+    sendToken(user, 200, res)
 
+})
+
+
+//logout user /api/v1/logout
+
+exports.logout = catchAsyncErrors(async (req, res, next) => {
+
+    res.cookie('token',null,{
+        expires: new Date(Date.now()),
+        httpOnly: true
+    })
+
+    res.status(200).json({
+        success:true,
+        message:'Logout successful'
+    })
 })
