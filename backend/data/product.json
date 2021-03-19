@@ -1,0 +1,87 @@
+[
+    {
+        "name": "memorCard",
+        "price": 50.00,
+        "description": "ultra fast cardo",
+        "rating": 4.5,
+        "images": [
+            {
+                "public_id": "products/tzfsnrli3szrdnb4jgge",
+                "url": "https://www.cleverfiles.com/images/upload/landings/memory-card-data-recovery/main_image.svg"
+            }
+        ],
+        "category": "Electronics",
+        "seller": "Ebay",
+        "stock": 50,
+        "numOfReviews": 10,
+        "reviews": []
+    },
+    {
+        "name": "Asus Laptop",
+        "price": 1500.00,
+        "description": "Black laptop ",
+        "rating": 5,
+        "images": [
+            {
+                "public_id": "products/fsdfs",
+                "url": "https://brain-images-ssl.cdn.dixons.com/4/2/10199624/u_10199624.jpg"
+            }
+        ],
+        "category": "Laptop",
+        "seller": "Amazon",
+        "stock": 15,
+        "numOfReviews": 6,
+        "reviews": []
+    },
+    {
+        "name": "Pizza",
+        "price": 20.00,
+        "description": "Large Pizza",
+        "rating": 3,
+        "images": [
+            {
+                "public_id": "products/tfdfli3szrdnb4jgge",
+                "url": "https://post.healthline.com/wp-content/uploads/2020/07/pizza-beer-1200x628-facebook-1200x628.jpg"
+            }
+        ],
+        "category": "Food",
+        "seller": "Pizza hut",
+        "stock": 3,
+        "numOfReviews": 2,
+        "reviews": []
+    },
+    {
+        "name": "Black Jeans",
+        "price": 100.00,
+        "description": "black jeans",
+        "rating": 1,
+        "images": [
+            {
+                "public_id": "products/tzfsnrli3szrdnb4jgge",
+                "url": "https://www.reiss.com/media/product/203/009/mid-rise-skinny-jeans-womens-lux-in-black-1.jpg?format=jpeg&auto=webp&quality=85&width=632&height=725&fit=bounds"
+            }
+        ],
+        "category": "clothes",
+        "seller": "Zara",
+        "stock": 6,
+        "numOfReviews": 10,
+        "reviews": []
+    },
+    {
+        "name": "Canon",
+        "price": 500.00,
+        "description": "ultra fast camera",
+        "rating": 4.5,
+        "images": [
+            {
+                "public_id": "products/tzfsnrli3szrdnb4jgge",
+                "url": "https://i1.adis.ws/i/canon/eos-r5_front_rf24-105mmf4lisusm_square_32c26ad194234d42b3cd9e582a21c99b?$prod-gallery-1by1-jpg$"
+            }
+        ],
+        "category": "Cameras",
+        "seller": "Geant",
+        "stock": 50,
+        "numOfReviews": 100,
+        "reviews": []
+    }
+]
