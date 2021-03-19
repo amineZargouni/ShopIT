@@ -22,6 +22,7 @@ exports.newProduct = catchAsyncErrors(async (req, res, next) => {
 })
 
 
+
 //get all products /api/v1/products
 
 exports.getProducts = async (req, res, next) => {
