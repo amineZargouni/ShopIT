@@ -145,7 +145,7 @@ exports.resetPassword = catchAsyncErrors(async (req, res, next) => {
 
     //setup new password
     user.password = req.body.password;
-    user.resetPassordToken = undefined;
+    user.resetPasswordToken = undefined;
     user.resetPasswordExpire = undefined;
 
     await user.save();
@@ -169,5 +169,17 @@ exports.logout = catchAsyncErrors(async (req, res, next) => {
     res.status(200).json({
         success: true,
         message: 'Logout successful'
+    })
+})
+
+
+//get currently loggedin user details /api/v1/me
+
+exports.getUserProfile = catchAsyncErrors(async (req, res, next)=>{
+
+    const user = await User.findById(req.user.id);
+    res.status(200).json({
+        success: true,
+        user
     })
 })
